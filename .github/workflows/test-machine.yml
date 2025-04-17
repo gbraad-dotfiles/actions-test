@@ -1,0 +1,40 @@
+name: Test machine
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-devenv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: virtualization support
+        uses: gbraad-actions/setup-virtualization@v1
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup environment
+        uses: gbraad-dotfiles/install-action@main
+        
+      - name: Run machine command - download
+        id: machine
+        uses: gbraad-dotfiles/devenv-action@main
+        with:
+          prefix: dotfedora
+          command: download
+
+      - name: Run machine command - start
+        uses: gbraad-dotfiles/machine-action@main
+        with: 
+          prefix: ${{ steps.machine.outputs.prefix }}
+          command: start
+
+      - name: Hang around
+        run: |
+          sleep 600
+
+      - name: Run machine command - stop
+        uses: gbraad-dotfiles/machine-action@main
+        with: 
+          prefix: ${{ steps.machine.outputs.prefix }}
+          command: stop
