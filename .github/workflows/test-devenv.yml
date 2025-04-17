@@ -1,10 +1,10 @@
-name: Test
+name: Test devenv
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-devenv:
+  test-devenv:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
