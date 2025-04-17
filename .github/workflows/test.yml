@@ -13,9 +13,17 @@ jobs:
       - name: Setup environment
         uses: gbraad-dotfiles/install-action@main
         
-      - name: Run devenv command
+      - name: Run devenv command - os-release
+        id: devenv
         uses: gbraad-dotfiles/devenv-action@main
         with:
           prefix: dotfedora
-          command: shell
+          command: exec
           args: cat /etc/os-release
+
+      - name: Run devenv command - systemctl
+        uses: gbraad-dotfiles/devenv-action@main
+        with: 
+          prefix: ${{ steps.devenv.outputs.prefix }}
+          command: exec
+          args: systemctl status
