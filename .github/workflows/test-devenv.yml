@@ -27,3 +27,9 @@ jobs:
           prefix: ${{ steps.devenv.outputs.prefix }}
           command: exec
           args: systemctl status
+
+      - name: Run devenv command - stop
+        uses: gbraad-dotfiles/devenv-action@main
+        with: 
+          prefix: ${{ steps.devenv.outputs.prefix }}
+          command: stop
