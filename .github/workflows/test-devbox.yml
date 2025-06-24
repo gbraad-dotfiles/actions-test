@@ -14,6 +14,12 @@ jobs:
         uses: gbraad-dotfiles/install-action@main
         with:
           sudo-change-shell: true
+
+      - name: Run distrobox install
+        uses: gbraad-dotfiles/apps-action@main
+        with:
+          appname: distrobox
+          action: install
         
       - name: Run devbox command - os-release
         id: devenv
