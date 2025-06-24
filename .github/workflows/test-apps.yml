@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-devenv:
+  test-apps:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -12,6 +12,8 @@ jobs:
 
       - name: Setup environment
         uses: gbraad-dotfiles/install-action@main
+        with:
+          sudo-change-shell: true
         
       - name: Run apps command - install code
         id: devenv
