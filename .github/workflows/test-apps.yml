@@ -1,0 +1,27 @@
+name: Test apps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-devenv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup environment
+        uses: gbraad-dotfiles/install-action@main
+        
+      - name: Run apps command - install code
+        id: devenv
+        uses: gbraad-dotfiles/apps-action@main
+        with:
+          appname: code
+          action: install
+
+      - name: Run apps command - run servewb
+        uses: gbraad-dotfiles/apps-action@main
+        with: 
+          appname: code
+          action: serveweb
