@@ -15,7 +15,9 @@ jobs:
 
       - name: Setup environment
         uses: gbraad-dotfiles/install-action@main
-        
+        with:
+          sudo-change-shell: true
+
       - name: Run machine command - download
         id: machine
         uses: gbraad-dotfiles/machine-action@main
