@@ -1,5 +1,5 @@
-Tests for dotfiles' actions
-===========================
+Action Tests for gbraad's Dotfiles
+==================================
 
   - [`install-action`](https://github.com/gbraad-dotfiles/install-action)
   - [`devenv-action`](https://github.com/gbraad-dotfiles/devenv-action)
