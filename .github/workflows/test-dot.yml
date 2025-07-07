@@ -12,15 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-
-      - name: Workaround - fixes compaudit
-        run: |
-          sudo chmod go-w /usr/share/zsh/vendor-completions
-          sudo chmod go-w /usr/share/zsh
-          #sudo chmod go-w /home/linuxbrew/.linuxbrew/share/zsh/site-functions
-          #sudo chmod go-w /home/linuxbrew/.linuxbrew/share/zsh
-          #sudo chmod go-w /home/linuxbrew/.linuxbrew/share/zsh/site-functions/_brew
-
       - name: Remove unwanted stuff
         uses: gbraad-actions/remove-unwanted@v1
 
@@ -53,6 +44,10 @@ jobs:
       #    git clone https://github.com/gbraad-dotfiles/upstream ~/.dotfiles
       #    mkdir -p ~/.local/bin
       #    ln -s ~/.dotfiles/bash/.local/bin/dot ~/.local/bin/dot
+      # Requirements
+      - name: Requiremnent for dot
+        run: |
+          sudo apt install -y zsh fzf
       # till here
 
       - name: Install required virtualization software
