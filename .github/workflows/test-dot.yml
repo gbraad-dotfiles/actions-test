@@ -50,24 +50,10 @@ jobs:
           sudo apt install -y zsh fzf
       # till here
 
-      - name: Install required virtualization software
-        continue-on-error: true
-        uses: gbraad-actions/setup-virtualization@v1
-
-      - name: Install containers tools (optional)
-        continue-on-error: true
-        uses: gbraad-actions/setup-container-tools@v1
-
-      - name: Codium Server
-        uses: gbraad-actions/codium-server-action@v1
-
-      - name: Jupyter Notebook
-        uses: gbraad-actions/jupyter-action@v1
-
       - name: Hang around
         run: |
           IP=`tailscale ip -4`
-          echo "Use the following command to connect \`tailscale ssh runner@${IP}\` or \`dotscreen runner@{IP}`"
+          echo "Use the following command to connect \`tailscale ssh runner@${IP}\` or \`dotscreen runner@${IP}\`"
           sleep 18000
 
       - name: Message user; 1 hour
