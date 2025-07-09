@@ -20,6 +20,7 @@ jobs:
             apps tailscale config operator
             apps tailscale config ssh
             apps tailscale up
+            tailscale ip -4
         env:
           TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
 
@@ -51,10 +52,15 @@ jobs:
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
-            devbox fedora start 
+            devbox fedora start
 
       - name: Run dot command - devbox fedora exec cat /etc/os-release
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             devbox fedora exec cat /etc/os-release
+
+      - name: Hang around
+        if: ${{ always() }}
+        run: |
+          sleep infinity
