@@ -1,4 +1,4 @@
-name: Test dot and apps on Fedora
+name: Test on Fedora
 
 on:
   workflow_dispatch:
@@ -11,9 +11,12 @@ jobs:
       options: --privileged
 
     steps:
-      - name: Requirement for dot
-        run: |
-          sudo dnf install -y zsh
+      - name: Run dot command - dotup
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            dotup
+          as_user: gbraad
 
       - name: Run dot command - apps codium install
         uses: gbraad-dotfiles/dot-action@main
@@ -27,7 +30,7 @@ jobs:
         with:
           run: |
             apps distrobox install
-          as_user: gbraad            
+          as_user: gbraad
 
       # Expected to fail, as dotfiles NOT installed
       #- name: Run apps command - install code
