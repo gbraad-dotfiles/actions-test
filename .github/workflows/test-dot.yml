@@ -20,6 +20,8 @@ jobs:
             apps tailscale config operator
             apps tailscale config ssh
             apps tailscale up
+        env:
+          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
 
       - name: Run dot command - apps codium install
         uses: gbraad-dotfiles/dot-action@main
