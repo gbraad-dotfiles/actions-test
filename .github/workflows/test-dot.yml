@@ -12,11 +12,30 @@ jobs:
           sudo apt update
           sudo apt install -y zsh
 
+      - name: Run dot command - apps tailscale
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            apps tailscale install
+            apps tailscale up
+
       - name: Run dot command - apps codium install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps codium install
+
+      - name: Run dot command - apps distrobox install
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            apps distrobox install
+
+      - name: Run dot command - dotfiles switch
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            dotfiles switch
 
       - name: Run dot command - devenv dotfedora exec cat /etc/os-release
         uses: gbraad-dotfiles/dot-action@main
@@ -24,3 +43,14 @@ jobs:
           run: |
             devenv dotfedora exec cat /etc/os-release
 
+      - name: Run dot command - devbox fedora start
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            devbox fedora start 
+
+      - name: Run dot command - devbox fedora exec cat /etc/os-release
+        uses: gbraad-dotfiles/dot-action@main
+        with:
+          run: |
+            devbox fedora exec cat /etc/os-release
