@@ -1,4 +1,4 @@
-name: Test on Fedora
+name: Test on container image
 
 on:
   workflow_dispatch:
@@ -7,12 +7,16 @@ on:
         description: 'User for dot-action'
         required: true
         default: 'gbraad'
-        
+      image:
+        description: 'Image to run'
+        required: true
+        default: 'ghcr.io/gbraad-dotfiles/fedora:latest'
+
 jobs:
   test-dot:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/gbraad-dotfiles/fedora:latest
+      image: ${{ github.event.inputs.image }}
       options: --privileged
 
     steps:
