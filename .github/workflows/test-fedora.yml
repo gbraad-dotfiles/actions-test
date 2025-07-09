@@ -10,29 +10,33 @@ jobs:
       image: ghcr.io/gbraad-dotfiles/fedora:latest
       options: --privileged
 
+    env:
+      DOT_USER: &dot_user gbraad
+
     steps:
       - name: Run dot command - dotup
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             dotup
-          as_user: gbraad
+          as_user: *dot_user
 
       - name: Run dot command - apps codium install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps codium install
-          as_user: gbraad
+          as_user: *dot_user
 
       - name: Run dot command - apps distrobox install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps distrobox install
-          as_user: gbraad
+          as_user: *dot_user
 
       # Expected to fail, as dotfiles NOT installed
+      # Todo: add an 'as_user' option to the action
       #- name: Run apps command - install code
       #  uses: gbraad-dotfiles/apps-action@main
       #  with:
