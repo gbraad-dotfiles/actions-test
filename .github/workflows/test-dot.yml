@@ -7,7 +7,7 @@ jobs:
   test-dot:
     runs-on: ubuntu-latest
     steps:
-      - name: Requiremnent for dot
+      - name: Requirement for dot
         run: |
           sudo apt update
           sudo apt install -y zsh
@@ -21,7 +21,6 @@ jobs:
             apps tailscale up
             # ssh needs to be set after going up
             apps tailscale config ssh
-            tailscale ip -4
         env:
           TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
 
@@ -37,11 +36,12 @@ jobs:
           run: |
             apps distrobox install
 
-      - name: Run dot command - dotfiles switch
-        uses: gbraad-dotfiles/dot-action@main
-        with:
-          run: |
-            dotfiles switch
+      # Not possible as privatekey needs to be known
+      #- name: Run dot command - dotfiles switch
+      #  uses: gbraad-dotfiles/dot-action@main
+      #  with:
+      #    run: |
+      #      dotfiles switch
 
       - name: Run dot command - devenv dotfedora exec cat /etc/os-release
         uses: gbraad-dotfiles/dot-action@main
@@ -62,6 +62,8 @@ jobs:
             devbox fedora exec cat /etc/os-release
 
       - name: Hang around
-        if: ${{ always() }}
+        if: ${{ failure() }}
         run: |
+          IP=`tailscale ip -4`
+          echo "Use the following command to connect \`tailscale ssh runner@${IP}\` or \`dotscreen runner@${IP}\`"
           sleep infinity
