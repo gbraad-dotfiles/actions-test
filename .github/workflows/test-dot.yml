@@ -18,8 +18,9 @@ jobs:
           run: |
             apps tailscale install
             apps tailscale config operator
-            apps tailscale config ssh
             apps tailscale up
+            # ssh needs to be set after going up
+            apps tailscale config ssh
             tailscale ip -4
         env:
           TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
