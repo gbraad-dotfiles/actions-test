@@ -2,7 +2,12 @@ name: Test on Fedora
 
 on:
   workflow_dispatch:
-
+    inputs:
+      dot_user:
+        description: 'User for dot-action'
+        required: true
+        default: 'gbraad'
+        
 jobs:
   test-dot:
     runs-on: ubuntu-latest
@@ -10,30 +15,27 @@ jobs:
       image: ghcr.io/gbraad-dotfiles/fedora:latest
       options: --privileged
 
-    env:
-      DOT_USER: &dot_user gbraad
-
     steps:
       - name: Run dot command - dotup
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             dotup
-          as_user: *dot_user
+          as_user: ${{ github.event.inputs.dot_user }}
 
       - name: Run dot command - apps codium install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps codium install
-          as_user: *dot_user
+          as_user: ${{ github.event.inputs.dot_user }}
 
       - name: Run dot command - apps distrobox install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps distrobox install
-          as_user: *dot_user
+          as_user: ${{ github.event.inputs.dot_user }}
 
       # Expected to fail, as dotfiles NOT installed
       # Todo: add an 'as_user' option to the action
