@@ -44,23 +44,3 @@ jobs:
         with:
           run: |
             devbox fedora exec cat /etc/os-release
-
-      - name: Run dot command - apps tailscale
-        if: ${{ failure() }}
-        uses: gbraad-dotfiles/dot-action@main
-        with:
-          run: |
-            apps tailscale install
-            apps tailscale config operator
-            apps tailscale up
-            # ssh needs to be set after going up
-            apps tailscale config ssh
-        env:
-          TAILSCALE_AUTHKEY: ${{ secrets.TAILSCALE_AUTHKEY }}
-
-      - name: Hang around
-        if: ${{ failure() }}
-        run: |
-          IP=`tailscale ip -4`
-          echo "Use the following command to connect \`tailscale ssh runner@${IP}\` or \`dotscreen runner@${IP}\`"
-          sleep infinity
