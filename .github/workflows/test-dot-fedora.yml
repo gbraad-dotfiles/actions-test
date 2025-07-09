@@ -27,12 +27,6 @@ jobs:
           run: |
             apps distrobox install
 
-      - name: Run dot command - devenv dotfedora exec cat /etc/os-release
-        uses: gbraad-dotfiles/dot-action@main
-        with:
-          run: |
-            devenv dotfedora exec cat /etc/os-release
-
       - name: Run dot command - devbox fedora start
         uses: gbraad-dotfiles/dot-action@main
         with:
