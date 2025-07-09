@@ -17,6 +17,8 @@ jobs:
         with:
           run: |
             apps tailscale install
+            apps tailscale config operator
+            apps tailscale config ssh
             apps tailscale up
 
       - name: Run dot command - apps codium install
