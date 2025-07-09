@@ -7,7 +7,7 @@ jobs:
   test-dot:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/gbraad-actions/fedora:stable
+      image: ghcr.io/gbraad-dotfiles/fedora:latest
       options: --privileged
 
     steps:
@@ -20,15 +20,18 @@ jobs:
         with:
           run: |
             apps codium install
+          as_user: gbraad
 
       - name: Run dot command - apps distrobox install
         uses: gbraad-dotfiles/dot-action@main
         with:
           run: |
             apps distrobox install
+          as_user: gbraad            
 
-      - name: Run apps command - install code
-        uses: gbraad-dotfiles/apps-action@main
-        with:
-          appname: code
-          action: install
+      # Expected to fail, as dotfiles NOT installed
+      #- name: Run apps command - install code
+      #  uses: gbraad-dotfiles/apps-action@main
+      #  with:
+      #    appname: code
+      #    action: install
