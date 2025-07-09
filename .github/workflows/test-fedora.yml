@@ -1,4 +1,4 @@
-name: Test dot
+name: Test dot and apps on Fedora
 
 on:
   workflow_dispatch:
@@ -27,14 +27,8 @@ jobs:
           run: |
             apps distrobox install
 
-      - name: Run dot command - devbox fedora start
-        uses: gbraad-dotfiles/dot-action@main
+      - name: Run apps command - install code
+        uses: gbraad-dotfiles/apps-action@main
         with:
-          run: |
-            devbox fedora start
-
-      - name: Run dot command - devbox fedora exec cat /etc/os-release
-        uses: gbraad-dotfiles/dot-action@main
-        with:
-          run: |
-            devbox fedora exec cat /etc/os-release
+          appname: code
+          action: install

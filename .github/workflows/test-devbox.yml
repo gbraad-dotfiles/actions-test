@@ -12,8 +12,6 @@ jobs:
 
       - name: Setup environment
         uses: gbraad-dotfiles/install-action@main
-        with:
-          sudo-change-shell: true
 
       - name: Run distrobox install
         uses: gbraad-dotfiles/apps-action@main
@@ -22,7 +20,7 @@ jobs:
           action: install
         
       - name: Run devbox command - os-release
-        id: devenv
+        id: devbox
         uses: gbraad-dotfiles/devbox-action@main
         with:
           prefix: fedora
@@ -32,12 +30,12 @@ jobs:
       - name: Run devbox command - systemctl
         uses: gbraad-dotfiles/devbox-action@main
         with: 
-          prefix: ${{ steps.devenv.outputs.prefix }}
+          prefix: ${{ steps.devbox.outputs.prefix }}
           command: exec
           args: systemctl status --no-pager
 
       - name: Run devenv command - stop
         uses: gbraad-dotfiles/devbox-action@main
         with: 
-          prefix: ${{ steps.devenv.outputs.prefix }}
+          prefix: ${{ steps.devbox.outputs.prefix }}
           command: stop
